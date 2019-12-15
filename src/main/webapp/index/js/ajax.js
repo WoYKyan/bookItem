@@ -1,17 +1,9 @@
 ﻿
-function getAjax() {/***    获取Ajax对象      **/
-    if (XMLHttpRequest) {
-        return new XMLHttpRequest();
-    } else if (ActiveXObject) {
-        return new ActiveXObject("Microsoft.XMLHTTP");
-    } else {
-        return -1;
-    }
-}
 function getCode(x,goal) {/** 获取验证码**/
     var xhr=new XMLHttpRequest();
     xhr.open("post","/user/check");
     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.withCredentials=true;
     xhr.send("PhoneNum="+x+"&goal="+goal);
 }
 

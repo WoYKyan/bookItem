@@ -36,7 +36,6 @@ public class BookController {
     private MassageController massageController;
     @Autowired
     private MassageService massageService;
-    public static List<BookInfo> ShoppingOrder;
     //卖书的控制方法
     @RequestMapping("/sell")
     public String sellBook(@RequestParam("Price") double Price,@RequestParam("BookName") String BookName,@RequestParam("BookText") String BookText,
@@ -173,7 +172,6 @@ public class BookController {
         String [] s =bookinfo.getPath().split(",");
         bookinfo.setPath(s[0]);
         bookInfos.add(bookinfo);
-        ShoppingOrder=bookInfos;
         model.addAttribute("BookInfos",bookInfos);
         return "/orderinfo/order";
     }

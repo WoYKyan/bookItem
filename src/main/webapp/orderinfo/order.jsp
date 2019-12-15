@@ -1,5 +1,7 @@
 <%@ page import="edu.heuet.Pojo.BookInfo" %>
 <%@ page import="java.util.List" %>
+<%@ page import="net.sf.json.JSON" %>
+<%@ page import="net.sf.json.JSONArray" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -170,7 +172,14 @@
 		<div id="submit_div_inner" class="submit">
 			<div class="box tip_tuan">
 				共<span class="red"><%=i%></span>件商品
-				<a id="submit" href="/order/createPay" class="btn_red">去支付</a>
+				<%
+					JSONArray array=JSONArray.fromObject(bookInfoList);
+
+				%>
+				<form action="/order/createPay" method="post">
+				<textarea hidden="hidden" name="bookInfos"><%=array%></textarea>
+				<button id="submit1" type="submit"  class="btn_red">去支付</button>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -200,7 +209,6 @@
     <style>
         .foot_tip_ad { width:40px; height:40px; font:12px/40px "simsun"; text-align:center; color:#fff; background-color:#474747; position:fixed; right:0; bottom:10px;_position:absolute; _bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));}
     </style>
-
 </body>
     <script type="text/javascript">
     	setTimeout(

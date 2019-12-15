@@ -23,17 +23,6 @@ public class MassageController {
     @Autowired
     MassageService massageService;
 
-//    @RequestMapping("/CreateMassage")
-//    @ResponseBody
-//    public String CreateMassage(Massage massage,HttpSession session, Model model){
-//        Integer userid=Integer.parseInt(session.getAttribute("UserId").toString());
-//        massage.setSender(userid);
-//        massage.setSendtime(System.currentTimeMillis());
-//        massage.setInforid(TimeUtil.getOrderId());
-//        massageService.createMassage(massage);
-//        return "success";
-//    }
-
     public boolean CreateMassageBySys(String msg,Integer receiver,MassageService massageService){
         /**创建系统消息**/
         Massage massage=new Massage();
@@ -59,10 +48,7 @@ public class MassageController {
             m.setFormatTime(time);
             massages1.add(m);
         }
-        System.out.println("222222222222222::::"+massages1.size());
-//        PageInfo<Massage> pageInfo = new PageInfo<>(massages1);
         model.addAttribute("massages",massages1);
-//        System.out.println(pageInfo.getPages());
         return "massage/massages";
     }
 }

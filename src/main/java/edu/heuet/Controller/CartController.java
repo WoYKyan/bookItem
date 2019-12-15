@@ -26,7 +26,7 @@ public class CartController
     private CartService cartService;//注入业务逻辑层接口
 
 
-    public static List<BookInfo> ShoppingOrder;
+//    public static List<BookInfo> ShoppingOrder;
     //实现添加商品进购物车
     @RequestMapping("/addCart")
     @ResponseBody                /***     添加到购物车***/
@@ -73,7 +73,7 @@ public class CartController
             bookinfo.setPath(s[0]);
             bookInfos1.add(bookinfo);
         }
-        ShoppingOrder=bookInfos1;
+//        ShoppingOrder=bookInfos1;
         return Price;
     }
 
@@ -92,8 +92,19 @@ public class CartController
     }
 
     @RequestMapping("/CreateOrderByCart")   /**  通过购物车创建订单**/
-    public String CreateOrderByCart(HttpSession session,Model model){
-        model.addAttribute("BookInfos",ShoppingOrder);
+    public String CreateOrderByCart(HttpSession session,Integer[] BookIds,Model model){
+        List<BookInfo> bookInfos=new ArrayList<>();
+        List<BookInfo> bookInfos1=new ArrayList<>();
+        for ( Integer i:BookIds) {
+            BookInfo bookInfo= cartService.selectById(i);
+            bookInfos.add(bookInfo);
+        }
+        for (BookInfo bookinfo:bookInfos) {
+            String [] s =bookinfo.getPath().split(",");
+            bookinfo.setPath(s[0]);
+            bookInfos1.add(bookinfo);
+        }
+        model.addAttribute("BookInfos",bookInfos1);
         return "/orderinfo/order";
     }
 

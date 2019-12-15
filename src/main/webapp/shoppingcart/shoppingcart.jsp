@@ -135,7 +135,7 @@
                     <td style="width: 15%;text-align: center;"><span>1</span>&nbsp;&nbsp;（本）</td>
                     <td style="width: 10%;text-align: center;"><span>${bookinfo.getPrice()}</span>&nbsp;&nbsp;￥</td>
                     <td style="width: 10%">
-                        <div style="float: top;height: 25px;text-align: center"><button  onclick="singleBuy(<%=i%>)">购买</button></div>
+                        <div style="float: top;height: 25px;text-align: center"><button  onclick="singleBuy(${bookinfo.getBookId()})">购买</button></div>
                         <div style="float: bottom;height: 25px;text-align: center"><button  onclick="deleteShoppingCart(${bookinfo.getBookId()})">删除</button></div>
                     </td>
                 </tr>

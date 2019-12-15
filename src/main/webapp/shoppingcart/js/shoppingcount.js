@@ -13,42 +13,48 @@ function Allcount() {    /*** 至少选择一件商品购买**/
     if(!flag){
         alert("您还没有选择要买的东西哦");
     }else {
-        selectbook();
-        window.location.href="/cart/CreateOrderByCart";
-
+        var booklist1=selectbook();
+        window.location.href="/cart/CreateOrderByCart?BookIds="+booklist1;
     }
+
+
+
     // var xhr=new XMLHttpRequest();
     // xhr.open("post","");
 }
 
 
 
-function singleBuy(i) {
-    var s=document.getElementById("book"+i);
-    s.checked=true;
-    var s=document.getElementsByName("book");
-    var count=0;
-    var k=0;
-    var booklist=[];
-    for(var i=0;i<s.length;i++){
-        if(s[i].checked){
-            count++;
-            booklist[k]=s[i].value;
-            k++;
-        }
-    }
-    var xhr=new XMLHttpRequest();
-    xhr.open("post","/cart/CountPrice");
-    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xhr.send("BookId="+booklist);
-    xhr.onreadystatechange=function () {
-        if (xhr.readyState==4 && xhr.status==200)
-        {
-            document.getElementById("payAmount").innerHTML=xhr.responseText;
-            window.location.href="/cart/CreateOrderByCart";
-        }
-    };
-    document.getElementById("countBook").innerHTML=count;
+function singleBuy(bookid) {
+    var bookids=[];
+    bookids[0]=bookid;
+    console.log("2222222222222222222222222222222222222222222222")
+    window.location.href="/cart/CreateOrderByCart?BookIds="+bookids;
+    // var s=document.getElementById("book"+i);
+    // s.checked=true;
+    // var s=document.getElementsByName("book");
+    // var count=0;
+    // var k=0;
+    // var booklist=[];
+    // for(var i=0;i<s.length;i++){
+    //     if(s[i].checked){
+    //         count++;
+    //         booklist[k]=s[i].value;
+    //         k++;
+    //     }
+    // }
+    // var xhr=new XMLHttpRequest();
+    // xhr.open("post","/cart/CountPrice");
+    // xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    // xhr.send("BookId="+booklist);
+    // xhr.onreadystatechange=function () {
+    //     if (xhr.readyState==4 && xhr.status==200)
+    //     {
+    //         document.getElementById("payAmount").innerHTML=xhr.responseText;
+    //         window.location.href="/cart/CreateOrderByCart";
+    //     }
+    // };
+    // document.getElementById("countBook").innerHTML=count;
 
 
 }
@@ -75,6 +81,7 @@ function selectbook() {   /**    选中商品计数  以及 总价      **/
         }
     };
     document.getElementById("countBook").innerHTML=count;
+    return booklist;
 }
 function selectAll() {    /** 全选所有购物车商品**/
     var s=document.getElementsByName("book");
